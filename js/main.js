@@ -1,8 +1,10 @@
 'use strict';
 
 function repo_escape(){
-    audio_reset();
-    video_reset();
+    if(!core_menu_open){
+        audio_reset();
+        video_reset();
+    }
 }
 
 function repo_init(){
