@@ -27,7 +27,39 @@ function repo_init(){
               }).then(function(stream){
                   audio_stream = stream;
 
+                  let audio_volume_element = document.getElementById('audio-volume');
+                  audio_volume_element.classList.remove('hidden');
+
                   document.getElementById('results-audio').innerHTML = audio_stream.id;
+
+                  let audio_context = new AudioContext();
+                  let audio_analyser = audio_context.createAnalyser();
+
+                  audio_analyser.smoothingTimeConstant = .8;
+                  audio_analyser.fftSize = 1024;
+
+                  let input = audio_context.createMediaStreamSource(audio_stream);
+                  audio_node = audio_context.createScriptProcessor(
+                    2048,
+                    1,
+                    1
+                  );
+
+                  input.connect(audio_analyser);
+                  audio_analyser.connect(audio_node);
+
+                  audio_node.connect(audio_context.destination);
+                  audio_node.onaudioprocess = function(){
+                      let array = new Uint8Array(audio_analyser.frequencyBinCount);
+                      audio_analyser.getByteFrequencyData(array);
+
+                      let array_length = array.length;
+                      let result = 0;
+                      for(let i = 0; i < array_length; i++){
+                          result += array[i];
+                      }
+                      audio_volume_element.value = result / array_length;
+                  };
 
               }).catch(function(error){
                   audio_reset();
@@ -65,9 +97,11 @@ function repo_init(){
       },
       'globals': {
         'audio_stream': 0,
+        'audio_node': false,
         'video_stream': 0,
       },
-      'info': '<input id=audio-test type=button value="Test Audio"><input id=audio-reset type=button value=Reset> <span id=results-audio></span><hr>'
+      'info': '<input id=audio-test type=button value="Test Audio"><input id=audio-reset type=button value=Reset> <span id=results-audio></span><br>'
+        + '<input class=hidden disabled id=audio-volume max=100 min=0 step=1 type=range value=0><hr>'
         + '<input id=video-test type=button value="Test Video"><input id=video-reset type=button value=Reset> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu': true,

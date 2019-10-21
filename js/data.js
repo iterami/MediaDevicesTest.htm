@@ -9,6 +9,16 @@ function audio_reset(){
         audio_stream = 0;
     }
 
+    if(audio_node !== false){
+        audio_node.disconnect();
+        audio_node.onaudioprocess = void 0;
+        audio_node = false;
+    }
+
+    let audio_volume_element = document.getElementById('audio-volume');
+    audio_volume_element.classList.add('hidden');
+    audio_volume_element.value = 0;
+
     document.getElementById('results-audio').innerHTML = '';
 }
 
