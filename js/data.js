@@ -15,7 +15,7 @@ function audio_reset(){
         audio_node = false;
     }
 
-    let audio_volume_element = document.getElementById('audio-volume');
+    let audio_volume_element = document.getElementById('audio-volume-range');
     audio_volume_element.classList.add('hidden');
     audio_volume_element.value = 0;
 

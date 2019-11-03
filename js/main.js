@@ -27,7 +27,7 @@ function repo_init(){
               }).then(function(stream){
                   audio_stream = stream;
 
-                  let audio_volume_element = document.getElementById('audio-volume');
+                  let audio_volume_element = document.getElementById('audio-volume-range');
                   audio_volume_element.classList.remove('hidden');
 
                   document.getElementById('results-audio').innerHTML = audio_stream.id;
@@ -101,7 +101,7 @@ function repo_init(){
         'video_stream': 0,
       },
       'info': '<input id=audio-test type=button value="Test Audio"><input id=audio-reset type=button value=Reset> <span id=results-audio></span><br>'
-        + '<input class=hidden disabled id=audio-volume max=100 min=0 step=1 type=range value=0><hr>'
+        + '<input class=hidden disabled id=audio-volume-range max=100 min=0 step=1 type=range value=0><hr>'
         + '<input id=video-test type=button value="Test Video"><input id=video-reset type=button value=Reset> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu': true,
