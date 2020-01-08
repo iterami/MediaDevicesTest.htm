@@ -19,7 +19,7 @@ function audio_reset(){
     audio_volume_element.classList.add('hidden');
     audio_volume_element.value = 0;
 
-    document.getElementById('results-audio').innerHTML = '';
+    document.getElementById('results-audio').textContent = '';
 }
 
 function video_reset(){
@@ -38,5 +38,5 @@ function video_reset(){
     video_element.removeAttribute('src');
     video_element.load();
 
-    document.getElementById('results-video').innerHTML = '';
+    document.getElementById('results-video').textContent = '';
 }

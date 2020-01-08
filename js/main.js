@@ -30,7 +30,7 @@ function repo_init(){
                   let audio_volume_element = document.getElementById('audio-volume-range');
                   audio_volume_element.classList.remove('hidden');
 
-                  document.getElementById('results-audio').innerHTML = audio_stream.id;
+                  document.getElementById('results-audio').textContent = audio_stream.id;
 
                   let audio_context = new AudioContext();
                   let audio_analyser = audio_context.createAnalyser();
@@ -64,7 +64,7 @@ function repo_init(){
               }).catch(function(error){
                   audio_reset();
 
-                  document.getElementById('results-audio').innerHTML = error.name;
+                  document.getElementById('results-audio').textContent = error.name;
               });
           },
         },
@@ -80,7 +80,7 @@ function repo_init(){
                   video_stream = stream;
 
                   let tracks = video_stream.getVideoTracks();
-                  document.getElementById('results-video').innerHTML = tracks[0].label;
+                  document.getElementById('results-video').textContent = tracks[0].label;
 
                   let video_element = document.getElementById('video-element');
                   video_element.classList.remove('hidden');
@@ -90,7 +90,7 @@ function repo_init(){
               }).catch(function(error){
                   video_reset();
 
-                  document.getElementById('results-video').innerHTML = error.name;
+                  document.getElementById('results-video').textContent = error.name;
               });
           },
         },
