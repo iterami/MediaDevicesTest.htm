@@ -2,7 +2,7 @@
 
 function audio_reset(){
     if(audio_stream !== 0){
-        let tracks = audio_stream.getTracks();
+        const tracks = audio_stream.getTracks();
         tracks.forEach(function(track){
             track.stop();
         });
@@ -15,7 +15,7 @@ function audio_reset(){
         audio_node = false;
     }
 
-    let audio_volume_element = document.getElementById('audio-volume-range');
+    const audio_volume_element = document.getElementById('audio-volume-range');
     audio_volume_element.classList.add('hidden');
     audio_volume_element.value = 0;
 
@@ -24,14 +24,14 @@ function audio_reset(){
 
 function video_reset(){
     if(video_stream !== 0){
-        let tracks = video_stream.getTracks();
+        const tracks = video_stream.getTracks();
         tracks.forEach(function(track){
             track.stop();
         });
         video_stream = 0;
     }
 
-    let video_element = document.getElementById('video-element');
+    const video_element = document.getElementById('video-element');
     video_element.classList.add('hidden');
     video_element.pause();
     video_element.removeAttribute('srcObject');

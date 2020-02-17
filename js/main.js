@@ -27,18 +27,18 @@ function repo_init(){
               }).then(function(stream){
                   audio_stream = stream;
 
-                  let audio_volume_element = document.getElementById('audio-volume-range');
+                  const audio_volume_element = document.getElementById('audio-volume-range');
                   audio_volume_element.classList.remove('hidden');
 
                   document.getElementById('results-audio').textContent = audio_stream.id;
 
-                  let audio_context = new AudioContext();
-                  let audio_analyser = audio_context.createAnalyser();
+                  const audio_context = new AudioContext();
+                  const audio_analyser = audio_context.createAnalyser();
 
                   audio_analyser.smoothingTimeConstant = .8;
                   audio_analyser.fftSize = 1024;
 
-                  let input = audio_context.createMediaStreamSource(audio_stream);
+                  const input = audio_context.createMediaStreamSource(audio_stream);
                   audio_node = audio_context.createScriptProcessor(
                     2048,
                     1,
@@ -50,10 +50,10 @@ function repo_init(){
 
                   audio_node.connect(audio_context.destination);
                   audio_node.onaudioprocess = function(){
-                      let array = new Uint8Array(audio_analyser.frequencyBinCount);
+                      const array = new Uint8Array(audio_analyser.frequencyBinCount);
                       audio_analyser.getByteFrequencyData(array);
 
-                      let array_length = array.length;
+                      const array_length = array.length;
                       let result = 0;
                       for(let i = 0; i < array_length; i++){
                           result += array[i];
@@ -79,10 +79,10 @@ function repo_init(){
               }).then(function(stream){
                   video_stream = stream;
 
-                  let tracks = video_stream.getVideoTracks();
+                  const tracks = video_stream.getVideoTracks();
                   document.getElementById('results-video').textContent = tracks[0].label;
 
-                  let video_element = document.getElementById('video-element');
+                  const video_element = document.getElementById('video-element');
                   video_element.classList.remove('hidden');
                   video_element.srcObject = stream;
                   video_element.play();
