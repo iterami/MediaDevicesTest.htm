@@ -53,12 +53,11 @@ function repo_init(){
                       const array = new Uint8Array(audio_analyser.frequencyBinCount);
                       audio_analyser.getByteFrequencyData(array);
 
-                      const array_length = array.length;
                       let result = 0;
-                      for(let i = 0; i < array_length; i++){
+                      for(let i = 0; i < array.length; i++){
                           result += array[i];
                       }
-                      audio_volume_element.value = result / array_length;
+                      audio_volume_element.value = result / array.length;
                   };
 
               }).catch(function(error){
