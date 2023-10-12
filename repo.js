@@ -126,6 +126,7 @@ function repo_init(){
         + '<input id=video-test type=button value="Test Video"><input id=video-reset type=button value=Reset> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu': true,
+      'menu-lock': true,
       'title': 'MediaDevicesTest.htm',
     });
 }
