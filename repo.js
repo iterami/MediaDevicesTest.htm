@@ -121,9 +121,9 @@ function repo_init(){
         'audio_node': false,
         'video_stream': 0,
       },
-      'info': '<input id=audio-test type=button value="Test Audio"><input id=audio-reset type=button value=Reset> <span id=results-audio></span><br>'
+      'info': '<button id=audio-test type=button>Test Audio</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
         + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0><hr>'
-        + '<input id=video-test type=button value="Test Video"><input id=video-reset type=button value=Reset> <span id=results-video></span><br>'
+        + '<button id=video-test type=button>Test Video</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu': true,
       'menu-lock': true,
