@@ -125,7 +125,6 @@ function repo_init(){
         + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0><hr>'
         + '<button id=video-test type=button>Test Video</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
-      'menu': true,
       'menu-lock': true,
       'title': 'MediaDevicesTest.htm',
     });
