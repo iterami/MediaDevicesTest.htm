@@ -15,18 +15,10 @@ function audio_reset(){
         audio_node = false;
     }
 
-    const audio_volume_element = document.getElementById('audio-volume-range');
-    audio_volume_element.classList.add('hidden');
-    audio_volume_element.value = 0;
+    core_elements['audio-volume-range'].classList.add('hidden');
+    core_elements['audio-volume-range'].value = 0;
 
-    document.getElementById('results-audio').textContent = '';
-}
-
-function repo_escape(){
-    if(!core_menu_open){
-        audio_reset();
-        video_reset();
-    }
+    core_elements['results-audio'].textContent = '';
 }
 
 function repo_init(){
@@ -49,10 +41,10 @@ function repo_init(){
               }).then(function(stream){
                   audio_stream = stream;
 
-                  const audio_volume_element = document.getElementById('audio-volume-range');
+                  const audio_volume_element = core_elements['audio-volume-range'];
                   audio_volume_element.classList.remove('hidden');
 
-                  document.getElementById('results-audio').textContent = audio_stream.id;
+                  core_elements['results-audio'].textContent = audio_stream.id;
 
                   const audio_context = new AudioContext();
                   const audio_analyser = audio_context.createAnalyser();
@@ -85,7 +77,7 @@ function repo_init(){
               }).catch(function(error){
                   audio_reset();
 
-                  document.getElementById('results-audio').textContent = error.name;
+                  core_elements['results-audio'].textContent = error.name;
               });
           },
         },
@@ -101,17 +93,16 @@ function repo_init(){
                   video_stream = stream;
 
                   const tracks = video_stream.getVideoTracks();
-                  document.getElementById('results-video').textContent = tracks[0].label;
+                  core_elements['results-video'].textContent = tracks[0].label;
 
-                  const video_element = document.getElementById('video-element');
-                  video_element.classList.remove('hidden');
-                  video_element.srcObject = stream;
-                  video_element.play();
+                  core_elements['video-element'].classList.remove('hidden');
+                  core_elements['video-element'].srcObject = stream;
+                  core_elements['video-element'].play();
 
               }).catch(function(error){
                   video_reset();
 
-                  document.getElementById('results-video').textContent = error.name;
+                  core_elements['results-video'].textContent = error.name;
               });
           },
         },
@@ -127,6 +118,12 @@ function repo_init(){
         + '<video class=hidden controls id=video-element></video>',
       'menu-lock': true,
       'title': 'MediaDevicesTest.htm',
+      'ui-elements': [
+        'audio-volume-range',
+        'results-audio',
+        'results-video',
+        'video-element',
+      ],
     });
 }
 
@@ -139,12 +136,11 @@ function video_reset(){
         video_stream = 0;
     }
 
-    const video_element = document.getElementById('video-element');
-    video_element.classList.add('hidden');
-    video_element.pause();
-    video_element.removeAttribute('srcObject');
-    video_element.removeAttribute('src');
-    video_element.load();
+    core_elements['video-element'].classList.add('hidden');
+    core_elements['video-element'].pause();
+    core_elements['video-element'].removeAttribute('srcObject');
+    core_elements['video-element'].removeAttribute('src');
+    core_elements['video-element'].load();
 
-    document.getElementById('results-video').textContent = '';
+    core_elements['results-video'].textContent = '';
 }
