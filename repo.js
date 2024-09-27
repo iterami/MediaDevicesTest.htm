@@ -112,9 +112,9 @@ function repo_init(){
         'audio_node': false,
         'video_stream': 0,
       },
-      'info': '<button id=audio-test type=button>Test Audio</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
+      'info': '<button id=audio-test type=button>Audio Test</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
         + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0><hr>'
-        + '<button id=video-test type=button>Test Video</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
+        + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu-lock': true,
       'title': 'MediaDevicesTest.htm',
