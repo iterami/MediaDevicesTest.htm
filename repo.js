@@ -1,5 +1,17 @@
 'use strict';
 
+function audio_output_left(){
+    audio_start('boop-left');
+}
+
+function audio_output_middle(){
+    audio_start('boop');
+}
+
+function audio_output_right(){
+    audio_start('boop-right');
+}
+
 function audio_reset(){
     if(audio_stream !== 0){
         const tracks = audio_stream.getTracks();
@@ -30,6 +42,15 @@ function repo_init(){
         }
       },
       'events': {
+        'audio-output-left': {
+          'onclick': audio_output_left,
+        },
+        'audio-output-middle': {
+          'onclick': audio_output_middle,
+        },
+        'audio-output-right': {
+          'onclick': audio_output_right,
+        },
         'audio-reset': {
           'onclick': audio_reset,
         },
@@ -112,8 +133,9 @@ function repo_init(){
         'audio_node': false,
         'video_stream': 0,
       },
-      'info': '<button id=audio-test type=button>Audio Test</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
+      'info': '<button id=audio-test type=button>Audio Input Test</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
         + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0><hr>'
+        + 'Audio Output Test:<button id=audio-output-left type=button>Left</button><button id=audio-output-middle type=button>Middle</button><button id=audio-output-right type=button>Right</button><hr>'
         + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu-lock': true,
@@ -124,6 +146,19 @@ function repo_init(){
         'results-video',
         'video-element',
       ],
+    });
+
+    audio_create({
+      'boop-left': {
+        'panner': {
+          'positionX': -1,
+        },
+      },
+      'boop-right': {
+        'panner': {
+          'positionX': 1,
+        },
+      },
     });
 }
 
