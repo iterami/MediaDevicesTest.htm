@@ -134,8 +134,8 @@ function repo_init(){
         'video_stream': 0,
       },
       'info': '<button id=audio-test type=button>Audio Input Test</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
-        + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0><hr>'
-        + 'Audio Output Test:<button id=audio-output-left type=button>Left</button><button id=audio-output-middle type=button>Middle</button><button id=audio-output-right type=button>Right</button><hr>'
+        + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0>'
+        + 'Audio Output Test:<button id=audio-output-left type=button>Left</button><button id=audio-output-middle type=button>Middle</button><button id=audio-output-right type=button>Right</button><br>'
         + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
         + '<video class=hidden controls id=video-element></video>',
       'menu-lock': true,
