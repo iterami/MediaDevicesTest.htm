@@ -27,10 +27,10 @@ function audio_reset(){
         audio_node = false;
     }
 
-    core_elements['audio-volume-range'].classList.add('hidden');
-    core_elements['audio-volume-range'].value = 0;
+    core_elements.audio_volume.classList.add('hidden');
+    core_elements.audio_volume.value = 0;
 
-    core_elements['results-audio'].textContent = '';
+    core_elements.results_audio.textContent = '';
 }
 
 function repo_init(){
@@ -42,19 +42,19 @@ function repo_init(){
         }
       },
       'events': {
-        'audio-output-left': {
+        'audio_left': {
           'onclick': audio_output_left,
         },
-        'audio-output-middle': {
+        'audio_middle': {
           'onclick': audio_output_middle,
         },
-        'audio-output-right': {
+        'audio_right': {
           'onclick': audio_output_right,
         },
-        'audio-reset': {
+        'audio_reset': {
           'onclick': audio_reset,
         },
-        'audio-test': {
+        'audio_test': {
           'onclick': function(){
               navigator.mediaDevices.getUserMedia({
                 'audio': true,
@@ -62,10 +62,10 @@ function repo_init(){
               }).then(function(stream){
                   audio_stream = stream;
 
-                  const audio_volume_element = core_elements['audio-volume-range'];
+                  const audio_volume_element = core_elements.audio_volume;
                   audio_volume_element.classList.remove('hidden');
 
-                  core_elements['results-audio'].textContent = audio_stream.id;
+                  core_elements.results_audio.textContent = audio_stream.id;
 
                   const audio_context = new AudioContext();
                   const audio_analyser = audio_context.createAnalyser();
@@ -98,7 +98,7 @@ function repo_init(){
               }).catch(function(error){
                   audio_reset();
 
-                  core_elements['results-audio'].textContent = error.name;
+                  core_elements.results_audio.textContent = error.name;
               });
           },
         },
@@ -114,16 +114,16 @@ function repo_init(){
                   video_stream = stream;
 
                   const tracks = video_stream.getVideoTracks();
-                  core_elements['results-video'].textContent = tracks[0].label;
+                  core_elements.results_video.textContent = tracks[0].label;
 
-                  core_elements['video-element'].classList.remove('hidden');
-                  core_elements['video-element'].srcObject = stream;
-                  core_elements['video-element'].play();
+                  core_elements.video.classList.remove('hidden');
+                  core_elements.video.srcObject = stream;
+                  core_elements.video.play();
 
               }).catch(function(error){
                   video_reset();
 
-                  core_elements['results-video'].textContent = error.name;
+                  core_elements.results_video.textContent = error.name;
               });
           },
         },
@@ -133,18 +133,18 @@ function repo_init(){
         'audio_node': false,
         'video_stream': 0,
       },
-      'info': '<button id=audio-test type=button>Audio Input Test</button><button id=audio-reset type=button>Reset</button> <span id=results-audio></span><br>'
-        + '<input class=hidden disabled id=audio-volume-range max=100 min=0 type=range value=0>'
-        + 'Audio Output Test:<button id=audio-output-left type=button>Left</button><button id=audio-output-middle type=button>Middle</button><button id=audio-output-right type=button>Right</button><br>'
-        + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results-video></span><br>'
-        + '<video class=hidden controls id=video-element></video>',
+      'info': '<button id=audio_test type=button>Audio Input Test</button><button id=audio_reset type=button>Reset</button> <span id=results_audio></span><br>'
+        + '<input class=hidden disabled id=audio_volume max=100 min=0 type=range value=0>'
+        + 'Audio Output Test:<button id=audio_left type=button>Left</button><button id=audio_middle type=button>Middle</button><button id=audio_right type=button>Right</button><br>'
+        + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results_video></span><br>'
+        + '<video class=hidden controls id=video></video>',
       'menu-lock': true,
       'title': 'MediaDevicesTest.htm',
       'ui-elements': [
-        'audio-volume-range',
-        'results-audio',
-        'results-video',
-        'video-element',
+        'audio_volume',
+        'results_audio',
+        'results_video',
+        'video',
       ],
     });
 
@@ -171,11 +171,11 @@ function video_reset(){
         video_stream = 0;
     }
 
-    core_elements['video-element'].classList.add('hidden');
-    core_elements['video-element'].pause();
-    core_elements['video-element'].removeAttribute('srcObject');
-    core_elements['video-element'].removeAttribute('src');
-    core_elements['video-element'].load();
+    core_elements.video.classList.add('hidden');
+    core_elements.video.pause();
+    core_elements.video.removeAttribute('srcObject');
+    core_elements.video.removeAttribute('src');
+    core_elements.video.load();
 
-    core_elements['results-video'].textContent = '';
+    core_elements.results_video.textContent = '';
 }
