@@ -138,7 +138,7 @@ function repo_init(){
         + 'Audio Output Test:<button id=audio_left type=button>Left</button><button id=audio_middle type=button>Middle</button><button id=audio_right type=button>Right</button><br>'
         + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results_video></span><br>'
         + '<video class=hidden controls id=video></video>',
-      'menu-lock': true,
+      'menu_lock': true,
       'title': 'MediaDevicesTest.htm',
       'ui-elements': [
         'audio_volume',
