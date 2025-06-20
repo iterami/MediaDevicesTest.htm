@@ -140,7 +140,7 @@ function repo_init(){
         + '<video class=hidden controls id=video></video>',
       'menu_lock': true,
       'title': 'MediaDevicesTest.htm',
-      'ui-elements': [
+      'ui_elements': [
         'audio_volume',
         'results_audio',
         'results_video',
