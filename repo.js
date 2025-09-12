@@ -62,7 +62,7 @@ function repo_init(){
               }).then(function(stream){
                   audio_stream = stream;
 
-                  const audio_volume_element = core_elements.audio_volume;
+                  const audio_volume_element = core_elements.results_audio_volume;
                   audio_volume_element.classList.remove('hidden');
 
                   core_elements.results_audio.textContent = audio_stream.id;
@@ -134,15 +134,15 @@ function repo_init(){
         'video_stream': 0,
       },
       'info': '<button id=audio_test type=button>Audio Input Test</button><button id=audio_reset type=button>Reset</button> <span id=results_audio></span><br>'
-        + '<input class=hidden disabled id=audio_volume max=100 min=0 type=range value=0>'
+        + '<input class=hidden disabled id=results_audio_volume max=100 min=0 type=range value=0>'
         + 'Audio Output Test:<button id=audio_left type=button>Left</button><button id=audio_middle type=button>Middle</button><button id=audio_right type=button>Right</button><br>'
         + '<button id=video-test type=button>Video Test</button><button id=video-reset type=button>Reset</button> <span id=results_video></span><br>'
         + '<video class=hidden controls id=video></video>',
       'menu_lock': true,
       'title': 'MediaDevicesTest.htm',
       'ui_elements': [
-        'audio_volume',
         'results_audio',
+        'results_audio_volume',
         'results_video',
         'video',
       ],
