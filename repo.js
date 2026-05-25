@@ -99,10 +99,9 @@ function repo_init(){
         'stream_audio': 0,
         'stream_video': 0,
       },
-      'info': '<button id=test_audio type=button>Audio Input Test</button><button id=reset_audio type=button>Reset</button><progress class=hidden id=results_audio_volume max=100 min=0 value=0></progress> <span id=results_audio></span><br>'
-        + 'Audio Output Test:<button id=left_audio type=button>Left</button><button id=middle_audio type=button>Middle</button><button id=right_audio type=button>Right</button><br>'
-        + '<button id=test_video type=button>Video Test</button><button id=reset_video type=button>Reset</button> <span id=results_video></span><br>'
-        + '<video class=hidden controls id=video></video>',
+      'info': '<table class=center><tr><td><button id=test_audio type=button>Audio Input Test</button><button id=reset_audio type=button>Reset</button><td><div id=results_audio></div><progress class=hidden id=results_audio_volume max=100 min=0 value=0></progress>'
+        + '<tr><td>Audio Output Test<td><button id=left_audio type=button>Left</button><button id=middle_audio type=button>Middle</button><button id=right_audio type=button>Right</button>'
+        + '<tr><td><button id=test_video type=button>Video Test</button><button id=reset_video type=button>Reset</button><td><div id=results_video></div><video class=hidden controls id=video></video></table>',
       'menu_lock': true,
       'title': 'MediaDevicesTest.htm',
       'ui_elements': [
