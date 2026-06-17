@@ -35,41 +35,7 @@ function repo_init(){
               navigator.mediaDevices.getUserMedia({
                 'audio': true,
                 'video': false,
-              }).then(function(stream){
-                  stream_audio = stream;
-                  const context = new AudioContext();
-
-                  const analyser = context.createAnalyser();
-                  analyser.smoothingTimeConstant = .8;
-                  analyser.fftSize = 1024;
-
-                  const input = context.createMediaStreamSource(stream_audio);
-                  input.connect(analyser);
-
-                  node = context.createScriptProcessor(2048, 1, 1);
-                  analyser.connect(node);
-
-                  const element = core_elements.results_audio_volume;
-                  node.connect(context.destination);
-                  node.onaudioprocess = function(){
-                      const array = new Uint8Array(analyser.frequencyBinCount);
-                      analyser.getByteFrequencyData(array);
-
-                      let result = 0;
-                      for(let i = 0; i < array.length; i++){
-                          result += array[i];
-                      }
-
-                      element.value = result / array.length;
-                  };
-
-                  element.classList.remove('hidden');
-                  core_elements.results_audio.textContent = stream_audio.id;
-
-              }).catch(function(error){
-                  reset_audio();
-                  core_elements.results_audio.textContent = error.name;
-              });
+              }).then(test_audio).catch(test_audio_error);
           },
         },
         'test_video': {
@@ -77,20 +43,7 @@ function repo_init(){
               navigator.mediaDevices.getUserMedia({
                 'audio': false,
                 'video': true,
-              }).then(function(stream){
-                  stream_video = stream;
-
-                  const tracks = stream_video.getVideoTracks();
-                  core_elements.results_video.textContent = tracks[0].label;
-
-                  core_elements.video.srcObject = stream;
-                  core_elements.video.classList.remove('hidden');
-                  core_elements.video.play();
-
-              }).catch(function(error){
-                  reset_video();
-                  core_elements.results_video.textContent = error.name;
-              });
+              }).then(test_video).catch(test_video_error);
           },
         },
       },
@@ -161,4 +114,57 @@ function reset_video(){
     video.removeAttribute('srcObject');
     video.removeAttribute('src');
     video.load();
+}
+
+function test_audio(stream){
+    stream_audio = stream;
+    const context = new AudioContext();
+
+    const analyser = context.createAnalyser();
+    analyser.smoothingTimeConstant = .8;
+    analyser.fftSize = 1024;
+
+    const input = context.createMediaStreamSource(stream_audio);
+    input.connect(analyser);
+
+    node = context.createScriptProcessor(2048, 1, 1);
+    analyser.connect(node);
+
+    const element = core_elements.results_audio_volume;
+    node.connect(context.destination);
+    node.onaudioprocess = function(){
+        const array = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+
+        let result = 0;
+        for(let i = 0; i < array.length; i++){
+            result += array[i];
+        }
+
+        element.value = result / array.length;
+    };
+
+    element.classList.remove('hidden');
+    core_elements.results_audio.textContent = stream_audio.id;
+}
+
+function test_audio_error(error){
+    reset_audio();
+    core_elements.results_audio.textContent = error.name;
+}
+
+function test_video(stream){
+    stream_video = stream;
+
+    const tracks = stream_video.getVideoTracks();
+    core_elements.results_video.textContent = tracks[0].label;
+
+    core_elements.video.srcObject = stream;
+    core_elements.video.classList.remove('hidden');
+    core_elements.video.play();
+}
+
+function test_video_error(error){
+    reset_video();
+    core_elements.results_video.textContent = error.name;
 }
