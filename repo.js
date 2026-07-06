@@ -137,10 +137,9 @@ function test_audio(stream){
         analyser.getByteFrequencyData(array);
 
         let result = 0;
-        for(let i = 0; i < array.length; i++){
-            result += array[i];
+        for(const value of array){
+            result += value;
         }
-
         element.value = result / array.length;
     };
 
