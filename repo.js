@@ -2,10 +2,6 @@
 
 function repo_init(){
     core_repo_init({
-      'beforeunload': function(){
-          reset_audio();
-          reset_video();
-      },
       'events': {
         'left_audio': {
           'onclick': function(){
